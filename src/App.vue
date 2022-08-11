@@ -246,8 +246,9 @@ html, body {
   width: 100%;
   max-width: 800px;
 
-  &--bad {
-    border: 1px solid red;
+  border: 3px solid transparent;
+  &--broken {
+    border-color: red;
   }
 
   textarea {
