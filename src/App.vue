@@ -1,13 +1,15 @@
 <template>
   <div id="app">
-    <m-calendar :calendar="calendar" />
+    <div class="container">
+      <m-calendar :calendar="calendar" />
 
-    <div v-if="parsedSettings.edit" class="editor">
-      <textarea
-        :class="{ 'editor--broken': settingsBad }"
-        v-model="settings"
-      />
-      <button @click="freeze" type="button">Freeze</button>
+      <div v-if="parsedSettings.edit" class="editor">
+        <textarea
+          :class="{ 'editor--broken': settingsBad }"
+          v-model="settings"
+        />
+        <button @click="freeze" type="button">Freeze</button>
+      </div>
     </div>
   </div>
 </template>
@@ -230,7 +232,11 @@ html, body {
 
 <style lang="scss" scoped>
 #app {
-  display: inline; // helps with firefox screenshot taker
+  display: flex;
+}
+
+.container {
+  margin: 0 auto;
 }
 
 .editor {

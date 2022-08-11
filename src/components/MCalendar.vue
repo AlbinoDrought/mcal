@@ -1,53 +1,55 @@
 <template>
-  <table class="calendar">
-    <thead class="title">
-      <tr>
-        <td :colspan="calendar.weeks[0].length">
-          <div class="titlebox">
-            <span></span>
-            <span>{{ calendar.title }}</span>
-            <img crossorigin="anonymous" :src="calendar.logo">
-          </div>
-        </td>
-      </tr>
-    </thead>
-    <thead class="days">
-      <tr>
-        <th v-for="(day, i) in calendar.weeks[0]" :key="i">
-          {{ day.format('ddd') }}
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="(week, i) in calendar.weeks" :key="i">
-        <td
-          v-for="(day, ii) in week"
-          :key="ii"
-          class="day"
-          :class="{ 'day--other-month': day.month() !== calendar.activeMonth }"
-        >
-          <div class="day-container">
-            <span class="date">
-              {{ day.format('D') }}
-            </span>
-            <span
-              v-if="day.event"
-              class="event"
-              :class="{
-                'event--start': day.event.start,
-                'event--ongoing': day.event.ongoing,
-                'event--end': day.event.end,
-                'event--single': day.event.single,
-              }"
-              :style="{ '--event-color': day.event.color, '--event-border': day.event.border }"
-            >
-              {{ day.event.text }}
-            </span>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="calendar">
+    <table>
+      <thead class="title">
+        <tr>
+          <td :colspan="calendar.weeks[0].length">
+            <div class="titlebox">
+              <span></span>
+              <span>{{ calendar.title }}</span>
+              <img crossorigin="anonymous" :src="calendar.logo">
+            </div>
+          </td>
+        </tr>
+      </thead>
+      <thead class="days">
+        <tr>
+          <th v-for="(day, i) in calendar.weeks[0]" :key="i">
+            {{ day.format('ddd') }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(week, i) in calendar.weeks" :key="i">
+          <td
+            v-for="(day, ii) in week"
+            :key="ii"
+            class="day"
+            :class="{ 'day--other-month': day.month() !== calendar.activeMonth }"
+          >
+            <div class="day-container">
+              <span class="date">
+                {{ day.format('D') }}
+              </span>
+              <span
+                v-if="day.event"
+                class="event"
+                :class="{
+                  'event--start': day.event.start,
+                  'event--ongoing': day.event.ongoing,
+                  'event--end': day.event.end,
+                  'event--single': day.event.single,
+                }"
+                :style="{ '--event-color': day.event.color, '--event-border': day.event.border }"
+              >
+                {{ day.event.text }}
+              </span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script>
@@ -63,10 +65,16 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
 
 .calendar {
+  border: 1px solid transparent; // hover the border w/ firefox screenshot tool ;)
   font-family: Avenir, Helvetica, Arial, sans-serif;
   text-align: center;
   color: #D6D7D8;
   background-color: #36393F;
+
+  font-size: 10px;
+  @media (min-width: 500px) {
+    font-size: unset;
+  }
 
   thead {
     &.title {
@@ -107,11 +115,13 @@ export default {
     }
   }
 
-  border-collapse: collapse;
-  thead.days, tbody {
-    tr, td, th {
-      border: 1px solid #41464D;
-      padding: 0.5em;
+  table {
+    border-collapse: collapse;
+    thead.days, tbody {
+      tr, td, th {
+        border: 1px solid #41464D;
+        padding: 0.5em;
+      }
     }
   }
 
