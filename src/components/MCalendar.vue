@@ -144,6 +144,7 @@ export default {
     text-align: center;
   }
   .event {
+    color: #D6D7D8;
     background-color: var(--event-color);
     border: 2px solid;
     border-color: var(--event-border);
